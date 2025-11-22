@@ -77,4 +77,11 @@
 }
 ````
 #### DELETE /clientes/:idCliente
--**Descrição**: Excliu um cliente cadastrado!
+-**Descrição**: Exclui um cliente cadastrado!
+
+-**Response**:
+````
+{
+    "message:": "Cliente deletado com Sucesso!"
+}
+````
