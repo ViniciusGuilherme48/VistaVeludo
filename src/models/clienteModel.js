@@ -1,5 +1,5 @@
 const { VarChar } = require("mssql");
-const { sql, getConnetion } = require("../config/db");
+const { sql, getConnection } = require("../config/db");
 
 const clienteModel = {
 
@@ -9,7 +9,7 @@ const clienteModel = {
 
             const pool = await getConnetion();
 
-            let querySQL = "SELECT * FROM clientes";
+            let querySQL = "SELECT * FROM Clientes";
 
             const result = await pool.request().query(querySQL);
 
@@ -18,15 +18,30 @@ const clienteModel = {
         } catch (error) {
 
             console.error('Erro ao buscar Clientes:', error);
-
             throw error;
 
         }
 
     },
+    buscarUm: async (idCliente)=>{
+        try {
+            const pool =await getConnetion();
+            const querySQL ='SELECT *FROM Cliente WHERE idCliente =@idCliente';
+
+            const result =await pool.request()
+            .input('idCliente', sql.UniqueIdentifier, idCliente)
+            .query(querySQL);
+            return result.recordset;
+
+        } catch (error) {
+            console.error('Erro ao buscar o cliente', error);
+            throw error;
+            
+        }
+    },
     
     //Buscar um cliente por CPF
-    BuscarCpf: async () => {
+    buscarCpf: async () => {
         
         try {
             const pool = await getConnetion();
@@ -66,7 +81,7 @@ const clienteModel = {
     },
 
     // Cadastrar clientes no banco de dados
-    CadastrarCliente: async (nomeCliente, cpfCliente, emailCliente, telefoneCliente, senhaCliente) => {
+    cadastrarCliente: async (nomeCliente, cpfCliente, emailCliente, telefoneCliente, senhaCliente) => {
         try {
 
             const pool = await getConnetion();
@@ -88,7 +103,44 @@ const clienteModel = {
 
         }
 
-    }
+    },
+    atualizarCliente: async (idCliente, nomeCliente,emailCliente, telefoneCliente, senhaCliente) => {
+        try {
+            const pool=await getConnetion();
+
+            const querySQL =`
+            UPDATE Clientes
+            SET nomeCliente =@nomeCliente,
+            emailCliente =@emailCliente,
+            telefoneCliente =@telefoneCliente,
+            WHERE idCliente =@idCliente
+            `
+            await pool.request()
+            .input('nomeCliente', sql.VarChar(100),nomeCliente)
+            .input('emailCliente', sql.VarChar(200), emailCliente)
+            .inout('telefoneCliente', sql.VarChar(20), telefoneCliente)
+            .query(querySQL);
+        } catch (error) {
+            console.error('Erro ao atualizar cliente:', error);
+            throw error;
+        }
+    },
+    deletarCliente: async(idCliente)=>{
+        try {
+            const pool=await getConnetion();
+            const querySQL=`
+            DELETE FROM Clientes
+            WHERE idCliente =@idCliente
+            `
+            await pool.request()
+            .input("idCliente", sql.UniqueIdentifier, idCliente)
+            .query(querySQL);
+
+        } catch (error) {
+            console.error('Erro ao deletar cliente:', error);
+            throw error;
+        }
+    }    
 
 }
 

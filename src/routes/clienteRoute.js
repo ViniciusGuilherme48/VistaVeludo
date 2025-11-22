@@ -6,6 +6,10 @@ const { clienteController } = require("../controllers/clienteController");
 router.get('/clientes', clienteController.listarCliente);
 
 //Rota post de cadastro de  clientes no banco de dados
-router.post('/clientes', clienteController.CadastrarCliente);
+router.post('/clientes', clienteController.cadastrarCliente);
+
+router.put('/clientes/:idCliente', clienteController.atualizarCliente);
+
+router.delete('/cliente/:idCliente', clienteController.deletarCliente);
 
 module.exports = { clienteRoutes: router };
