@@ -12,6 +12,10 @@
 {
     "nomeProduto": "produtoExemplo"
     "precoProduto": 0.00
+    "corProduto": "corExemplo"
+    "tamanhoProduto": "tamanhoExemplo"
+    "categoria": "categoriaExemplo"
+    "qtdeProduto": "qtdeExemplo"
 }
 ```
 - **Response**:
@@ -27,6 +31,10 @@
 {
     "nomeProduto": "nomeExemplo"
     "precoProduto": 0.00
+    "corProduto": "corExemplo"
+    "tamanhoProduto": "tamanhoExemplo"
+    "categoria": "categoriaExemplo"
+    "qtdeProduto": "qtdeExemplo"
 }
 ```
 - **Response**:
@@ -57,6 +65,7 @@
     "cpfCliente": "cpfExemplo"
     "emailCliente": "emailExemplo"
     "telefoneCliente": "telefoneExemplo"
+    "senhaCliente": "senhaEexemplo"
 }
 ```
 - **Response**:
@@ -74,6 +83,7 @@
     "cpfCliente": "cpfExemplo"
     "emailCliente": "emailExemplo"
     "telefoneCliente": "telefoneExemplo"
+     "senhaCliente": "senhaEexemplo"
 }
 ```
 #### DELETE /clientes/:idCliente
