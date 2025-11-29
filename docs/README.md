@@ -1,41 +1,41 @@
 ## API Reference
 ### Produtos
 #### GET /produtos
--**Descrição**: Obtém uma lista dos produtos
--**Parameters**: ?nomeProduto = "produtoExemplo" obtém um filtro de produtos buscando pelo nome do produto
--**Response**: Array de Produtos
+- **Descrição**: Obtém uma lista dos produtos
+- **Parameters**: ?nomeProduto = "produtoExemplo" obtém um filtro de produtos buscando pelo nome do produto
+- **Response**: Array de Produtos
 
 #### POST /produtos
--**Descrição**: Cria um novo produto
--**Body**: 
+- **Descrição**: Cria um novo produto
+- **Body**: 
 ```
 {
     "nomeProduto": "produtoExemplo"
     "precoProduto": 0.00
 }
 ```
--**Response**:
+- **Response**:
 ```
 {
     "message": "Produto cadastrado com sucesso!"
 }
 ```
 #### PUT /produtos/:idProduto
--**Descrição**: Atualizar um produto já existente 
--**Body**:
+- **Descrição**: Atualizar um produto já existente 
+- **Body**:
 ```
 {
     "nomeProduto": "nomeExemplo"
     "precoProduto": 0.00
 }
 ```
--**Response**:
+- **Response**:
 {
     "message": "Produto atualizado com sucesso!
 }
 #### DELETE /produtos/:idProduto
--**Descrição**: Deleta um produto ja cadastrado
--**Response**: 
+- **Descrição**: Deleta um produto ja cadastrado
+- **Response**: 
 {
     "message": "Produto deletado com sucesso!"
 }
@@ -43,14 +43,14 @@
 ## API Reference
 ### Clientes
 #### GET /clientes
--**Descrição**: Obtém uma lista dos clientes
--**Parameters**: ?nomeCliente = "nomeExemplo" obtém um filtro de clientes buscados pelo nome
--**Response**: Array de Clientes
+- **Descrição**: Obtém uma lista dos clientes
+- **Parameters**: ?nomeCliente = "nomeExemplo" obtém um filtro de clientes buscados pelo nome
+- **Response**: Array de Clientes
 
 
 #### POST /clientes
--**Descrição**: Cadastra um novo cliente
--**Body**:
+- **Descrição**: Cadastra um novo cliente
+- **Body**:
 ```
 {
     "nomeCliente": "clienteExemplo"
@@ -59,15 +59,15 @@
     "telefoneCliente": "telefoneExemplo"
 }
 ```
--**Response**:
+- **Response**:
 ```
 {
     "message:": "Cliente cadastrado com Sucesso!"
 }
 ```
 #### PUT /clientes/:idCliente
--**Descrição**: Atualizar um cliente ja exiteste
--**Body**:
+- **Descrição**: Atualizar um cliente ja exiteste
+- **Body**:
 ```
 {
     "nomeCliente": "nomeExemplo"
@@ -77,9 +77,9 @@
 }
 ```
 #### DELETE /clientes/:idCliente
--**Descrição**: Exclui um cliente cadastrado!
+- **Descrição**: Exclui um cliente cadastrado!
 
--**Response**:
+- **Response**:
 ```
 {
     "message:": "Cliente deletado com Sucesso!"
