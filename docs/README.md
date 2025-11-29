@@ -8,27 +8,27 @@
 #### POST /produtos
 -**Descrição**: Cria um novo produto
 -**Body**: 
-````
+```
 {
     "nomeProduto": "produtoExemplo"
     "precoProduto": 0.00
 }
-````
+```
 -**Response**:
-````
+```
 {
     "message": "Produto cadastrado com sucesso!"
 }
-````
+```
 #### PUT /produtos/:idProduto
 -**Descrição**: Atualizar um produto já existente 
 -**Body**:
-````
+```
 {
     "nomeProduto": "nomeExemplo"
     "precoProduto": 0.00
 }
-````
+```
 -**Response**:
 {
     "message": "Produto atualizado com sucesso!
@@ -51,37 +51,37 @@
 #### POST /clientes
 -**Descrição**: Cadastra um novo cliente
 -**Body**:
-````
+```
 {
     "nomeCliente": "clienteExemplo"
     "cpfCliente": "cpfExemplo"
     "emailCliente": "emailExemplo"
     "telefoneCliente": "telefoneExemplo"
 }
-````
+```
 -**Response**:
-````
+```
 {
     "message:": "Cliente cadastrado com Sucesso!"
 }
-````
+```
 #### PUT /clientes/:idCliente
 -**Descrição**: Atualizar um cliente ja exiteste
 -**Body**:
-````
+```
 {
     "nomeCliente": "nomeExemplo"
     "cpfCliente": "cpfExemplo"
     "emailCliente": "emailExemplo"
     "telefoneCliente": "telefoneExemplo"
 }
-````
+```
 #### DELETE /clientes/:idCliente
 -**Descrição**: Exclui um cliente cadastrado!
 
 -**Response**:
-````
+```
 {
     "message:": "Cliente deletado com Sucesso!"
 }
-````
+```
