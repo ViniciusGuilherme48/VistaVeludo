@@ -78,6 +78,8 @@ const clienteController = {
 
             const telefoneAtualizado = telefoneCliente ?? clienteAtual.telefoneCliente;
 
+            const senhaAtualizada = senhaCliente ?? clienteAtual.senhaCliente;
+
             await clienteModel.atualizarCliente(idCliente, nomeAtualizado, telefoneAtualizado, emailAtualizado);
             res.status(200).json({message: 'Cliente atualizado!'});
 

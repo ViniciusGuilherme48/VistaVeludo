@@ -25,7 +25,7 @@ const clienteModel = {
     buscarUm: async (idCliente) => {
         try {
             const pool = await getConnection();
-            const querySQL = 'SELECT *FROM Cliente WHERE idCliente =@idCliente';
+            const querySQL = 'SELECT *FROM Clientes WHERE idCliente =@idCliente';
 
             const result = await pool.request()
                 .input('idCliente', sql.UniqueIdentifier, idCliente)
@@ -65,7 +65,7 @@ const clienteModel = {
         try {
             const pool = await getConnection();
 
-            let querySQL = `SELECT * FROM cliente WHERE emailCliente = @emailCliente`;
+            let querySQL = `SELECT * FROM Clientes WHERE emailCliente = @emailCliente`;
 
             const result = await pool.request()
                 .input('emailCliente', sql.VarChar(200), emailCliente)
@@ -114,12 +114,15 @@ const clienteModel = {
             SET nomeCliente =@nomeCliente,
             emailCliente =@emailCliente,
             telefoneCliente =@telefoneCliente,
+            senhaCliente =@senhaCliente 
             WHERE idCliente =@idCliente
             `
             await pool.request()
+                .input('idCliente', sql.UniqueIdentifier, idCliente)
                 .input('nomeCliente', sql.VarChar(100), nomeCliente)
                 .input('emailCliente', sql.VarChar(200), emailCliente)
-                .inout('telefoneCliente', sql.VarChar(20), telefoneCliente)
+                .input('telefoneCliente', sql.VarChar(20), telefoneCliente)
+                .input('senhaCliente', sql.VarChar(255), senhaCliente)
                 .query(querySQL);
         } catch (error) {
             console.error('Erro ao atualizar cliente:', error);

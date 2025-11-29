@@ -14,6 +14,6 @@ router.post('/clientes', clienteController.cadastrarCliente);
 router.put('/clientes/:idCliente', clienteController.atualizarCliente);
 
 //Rota delete para deletar clientes
-router.delete('/cliente/:idCliente', clienteController.deletarCliente);
+router.delete('/clientes/:idCliente', clienteController.deletarCliente);
 
 module.exports = { clienteRoutes: router };

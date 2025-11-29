@@ -29,11 +29,13 @@ const produtoModel = {
 
             const pool = await getConnection();
 
-            const querySQL = `SELECT *FROM Produtos WHERE idProduto = @idProduto`;
+            const querySQL = `SELECT * FROM Produtos WHERE idProduto = @idProduto`;
 
             const result = await pool.request()
                 .input('idProduto', sql.UniqueIdentifier, idProduto)
                 .query(querySQL);
+
+            return result.recordset;
 
         } catch (error) {
 
@@ -50,7 +52,7 @@ const produtoModel = {
 
             const pool = await getConnection();
 
-            let querySQL = `INSERT INTO Produto (nomeProduto, precoProduto, corProduto, tamanhoProduto, categoriaProduto, qtdeProduto) VALUES (@nomeProduto, @precoProduto, @corProduto, @tamanhoProduto, @categoriaProduto, @qtdeProduto)`;
+            let querySQL = `INSERT INTO Produtos (nomeProduto, precoProduto, corProduto, tamanhoProduto, categoriaProduto, qtdeProduto) VALUES (@nomeProduto, @precoProduto, @corProduto, @tamanhoProduto, @categoriaProduto, @qtdeProduto)`;
 
             await pool.request()
                 .input('nomeProduto', sql.VarChar(100), nomeProduto)
@@ -58,7 +60,7 @@ const produtoModel = {
                 .input('corProduto', sql.VarChar(100), corProduto)
                 .input('tamanhoProduto', sql.VarChar(1), tamanhoProduto)
                 .input('categoriaProduto', sql.VarChar(50), categoriaProduto)
-                .input('qtdeProduto', sql.int(), qtdeProduto)
+                .input('qtdeProduto', sql.Int, qtdeProduto)
                 .query(querySQL);
 
         } catch (error) {
@@ -82,7 +84,7 @@ const produtoModel = {
             await pool.request()
                 .input('nomeProduto', sql.VarChar(100), nomeProduto)
                 .input('precoProduto', sql.Decimal(10, 2), precoProduto)
-                .input('qtdeProduto', sql.int(), qtdeProduto)
+                .input('qtdeProduto', sql.Int, qtdeProduto)
                 .input('idProduto', sql.UniqueIdentifier, idProduto)
                 .query(querySQL);
 
