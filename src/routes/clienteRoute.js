@@ -5,7 +5,7 @@ const { verify } = require("../middlewares/authMiddleware");
 const { authController} = require("../controllers/authController");
 
 //Rota get para listar todos os clientes
-router.get('/clientes', verify.cliente, clienteController.listarCliente);
+router.get('/clientes', clienteController.listarCliente);
 
 //Rota post para cadastro de clientes
 router.post('/clientes', clienteController.cadastrarCliente);

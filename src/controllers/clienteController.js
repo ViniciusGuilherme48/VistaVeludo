@@ -1,4 +1,3 @@
-const {default: Message} = require("tedious/lib/message");
 const { clienteModel } = require("../models/clienteModel");
 const bcrypt = require('bcrypt');
 
@@ -24,7 +23,7 @@ const clienteController = {
     cadastrarCliente: async (req, res) => {
 
         try {
-            const { nomeCliente, cpfCliente, emailCliente, senhaCliente } = req.body;
+            const { nomeCliente, cpfCliente, emailCliente, telefoneCliente, senhaCliente } = req.body;
 
             if (nomeCliente == undefined || cpfCliente == undefined || emailCliente == undefined || senhaCliente == isNaN) {
                 return res.status(400).json({
@@ -37,13 +36,13 @@ const clienteController = {
             const senhaCriptografada = await bcrypt.hash(senhaCliente, saltRounds);
 
             //verificar CPF existente
-            const clientes = await clienteModel.BuscarCpf(cpfCliente);
+            const clientes = await clienteModel.buscarCpf(cpfCliente);
 
             if (clientes.length > 0) {
                 return res.status(409).json({ erro: 'CPF já cadastrado' });
             }
 
-            await clienteModel.CadastrarCliente(nomeCliente, cpfCliente, emailCliente, senhaCriptografada);
+            await clienteModel.cadastrarCliente(nomeCliente, cpfCliente, emailCliente, telefoneCliente, senhaCriptografada);
 
             res.status(201).json({
                 message: 'cliente cadastrado com sucesso'

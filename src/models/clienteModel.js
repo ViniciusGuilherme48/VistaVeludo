@@ -1,4 +1,3 @@
-const { VarChar } = require("mssql");
 const { sql, getConnection } = require("../config/db");
 
 const clienteModel = {
@@ -7,7 +6,7 @@ const clienteModel = {
     buscarTodos: async () => {
         try {
 
-            const pool = await getConnetion();
+            const pool = await getConnection();
 
             let querySQL = "SELECT * FROM Clientes";
 
@@ -23,34 +22,36 @@ const clienteModel = {
         }
 
     },
-    buscarUm: async (idCliente)=>{
+    buscarUm: async (idCliente) => {
         try {
-            const pool =await getConnetion();
-            const querySQL ='SELECT *FROM Cliente WHERE idCliente =@idCliente';
+            const pool = await getConnection();
+            const querySQL = 'SELECT *FROM Cliente WHERE idCliente =@idCliente';
 
-            const result =await pool.request()
-            .input('idCliente', sql.UniqueIdentifier, idCliente)
-            .query(querySQL);
+            const result = await pool.request()
+                .input('idCliente', sql.UniqueIdentifier, idCliente)
+                .query(querySQL);
             return result.recordset;
 
         } catch (error) {
             console.error('Erro ao buscar o cliente', error);
             throw error;
-            
+
         }
     },
-    
-    //Buscar um cliente por CPF
-    buscarCpf: async () => {
-        
-        try {
-            const pool = await getConnetion();
 
-            let querySQL =`SELECT * FROM cliente WHERE cpfCliente = @cpfCliente `;
+    //Buscar um cliente por CPF
+    buscarCpf: async (cpfCliente) => {
+
+        try {
+            const pool = await getConnection();
+
+            let querySQL = `SELECT * FROM clientes WHERE cpfCliente = @cpfCliente `;
 
             const result = await pool.request()
-            .input('cpfCliente', sql.VarChar(15), cpfCliente)
-            .query(querySQL);
+                .input('cpfCliente', sql.VarChar(15), cpfCliente)
+                .query(querySQL);
+
+            return result.recordset;
 
         } catch (error) {
             console.error('Erro ao verificar o CPF', error);
@@ -60,20 +61,20 @@ const clienteModel = {
 
     //buscar cliente por email
     buscarEmail: async (emailCliente) => {
-        
+
         try {
-            const pool = await getConnetion();
+            const pool = await getConnection();
 
             let querySQL = `SELECT * FROM cliente WHERE emailCliente = @emailCliente`;
 
             const result = await pool.request()
-            .input('emailCliente', sql.VarChar(200), emailCliente)
-            .query(querySQL);
+                .input('emailCliente', sql.VarChar(200), emailCliente)
+                .query(querySQL);
 
             return result.recordset;
 
         } catch (error) {
-            
+
             console.error('Erro ao verificar o email', error);
             throw error;
 
@@ -84,16 +85,16 @@ const clienteModel = {
     cadastrarCliente: async (nomeCliente, cpfCliente, emailCliente, telefoneCliente, senhaCliente) => {
         try {
 
-            const pool = await getConnetion();
+            const pool = await getConnection();
 
             let querySQL = 'INSERT INTO clientes (nomeCliente, cpfCliente, emailCliente, telefoneCliente, senhaCliente) VALUES (@nomeCliente, @cpfCliente, @emailCliente, @telefoneCliente, @senhaCliente)';
             await pool.request()
-            .input('nomeCliente', sql.VarChar(100),nomeCliente)
-            .input('cpfCliente', sql.VarChar(15), cpfCliente)
-            .input('emailCliente', sql.VarChar(200), emailCliente)
-            .inout('telefoneCliente', sql.VarChar(20), telefoneCliente)
-            .input('senhaCliente', sql.VarChar(255), senhaCliente)
-            .query(querySQL);
+                .input('nomeCliente', sql.VarChar(100), nomeCliente)
+                .input('cpfCliente', sql.VarChar(15), cpfCliente)
+                .input('emailCliente', sql.VarChar(200), emailCliente)
+                .input('telefoneCliente', sql.VarChar(20), telefoneCliente)
+                .input('senhaCliente', sql.VarChar(255), senhaCliente)
+                .query(querySQL);
 
         } catch (error) {
 
@@ -104,11 +105,11 @@ const clienteModel = {
         }
 
     },
-    atualizarCliente: async (idCliente, nomeCliente,emailCliente, telefoneCliente, senhaCliente) => {
+    atualizarCliente: async (idCliente, nomeCliente, emailCliente, telefoneCliente, senhaCliente) => {
         try {
-            const pool=await getConnetion();
+            const pool = await getConnection();
 
-            const querySQL =`
+            const querySQL = `
             UPDATE Clientes
             SET nomeCliente =@nomeCliente,
             emailCliente =@emailCliente,
@@ -116,32 +117,32 @@ const clienteModel = {
             WHERE idCliente =@idCliente
             `
             await pool.request()
-            .input('nomeCliente', sql.VarChar(100),nomeCliente)
-            .input('emailCliente', sql.VarChar(200), emailCliente)
-            .inout('telefoneCliente', sql.VarChar(20), telefoneCliente)
-            .query(querySQL);
+                .input('nomeCliente', sql.VarChar(100), nomeCliente)
+                .input('emailCliente', sql.VarChar(200), emailCliente)
+                .inout('telefoneCliente', sql.VarChar(20), telefoneCliente)
+                .query(querySQL);
         } catch (error) {
             console.error('Erro ao atualizar cliente:', error);
             throw error;
         }
     },
-    deletarCliente: async(idCliente)=>{
+    deletarCliente: async (idCliente) => {
         try {
-            const pool=await getConnetion();
-            const querySQL=`
+            const pool = await getConnection();
+            const querySQL = `
             DELETE FROM Clientes
             WHERE idCliente =@idCliente
             `
             await pool.request()
-            .input("idCliente", sql.UniqueIdentifier, idCliente)
-            .query(querySQL);
+                .input("idCliente", sql.UniqueIdentifier, idCliente)
+                .query(querySQL);
 
         } catch (error) {
             console.error('Erro ao deletar cliente:', error);
             throw error;
         }
-    }    
+    }
 
 }
 
-module.exports = {clienteModel};
+module.exports = { clienteModel };
