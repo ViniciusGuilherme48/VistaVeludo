@@ -1,42 +1,44 @@
 const { sql, getConnection } = require("../config/db")
 
 const pedidoModel = {
-    
-    criarPedido: async (nomeCliente, nomeProduto, categoriaProduto, qtdeProduto) => {
+    criarPedido: async (idCliente) => {
         try {
             const pool = await getConnection();
 
-            let querySQL = `
-            INSERT INTO Pedidos
-            (
-            nomeCliente,
-            nomeProduto,
-            categoriaProduto,
-            qtdeProduto
-            ) VALUES 
-            (
-            @nomeCliente,
-            @nomeProduto,
-            @categoriaProduto,
-            @qtdeProduto
-            )
-            `
+            const querySQL = `
+                INSERT INTO Pedidos (idCliente)
+                OUTPUT INSERTED.idPedido
+                VALUES (@idCliente)
+            `;
 
-            await pool.request()
-                .input('nomeCliente', sql.VarChar(100) ,nomeCliente)
-                .input('nomeProduto', sql.VarChar(100) ,nomeProduto)
-                .input('categoriaProduto', sql.VarChar(100) ,categoriaProduto)
-                .input('qtdeProduto', sql.Int ,qtdeProduto)      
-                .query(querySQL)      
+            const result = await pool.request()
+                .input("idCliente", sql.UniqueIdentifier, idCliente)
+                .query(querySQL);
 
-            
+            // Retornar o GUID gerado
+            return result.recordset[0].idPedido;
+
         } catch (error) {
-            console.error('Erro ao cadastrar produto', error)
+            console.error("Erro ao criar pedido:", error);
+            throw error;
+        }
+    },
+
+    listarPedidos: async () => {
+        try {
+            const pool = await getConnection()
+
+            let querySQL = "SELECT * FROM Pedidos"
+
+            const result = await pool.request().query(querySQL)
+
+            return result.recordset
+        } catch (error) {
+            console.error("Erro ao buscar produtos", error)
             throw error
         }
     }
 }
-
 module.exports = {
-    pedidoModel
-}
+        pedidoModel
+    }
