@@ -28,7 +28,7 @@ const produtoController = {
             }
 
             await produtoModel.cadastrarProduto(nomeProduto, precoProduto, corProduto, tamanhoProduto, categoriaProduto, qtdeProduto);
-            res.status(201).json({ erro: 'Erro ao cadastrar produto' });
+            res.status(201).json({ erro: 'Produto cadastrado com sucesso' });
 
         } catch (error) {
 

@@ -48,7 +48,6 @@
     "message": "Produto deletado com sucesso!"
 }
 
-## API Reference
 ### Clientes
 #### GET /clientes
 - **Descrição**: Obtém uma lista dos clientes
@@ -93,5 +92,25 @@
 ```
 {
     "message:": "Cliente deletado com Sucesso!"
+}
+```
+### PEDIDOS
+#### POST /pedidos
+- **Descriçao**: Cria um novo pedido
+
+- **Body**:
+```
+{
+    "nomeCliente": "Ygor Matheus",
+	"nomeProduto": "Geladeira",
+	"categoriaProduto": "Electrodomestico",
+	"qtdeProduto": 1 
+}
+```
+
+- **Response**:
+```
+{
+    "message": "Pedido cadastrado com sucesso"
 }
 ```
