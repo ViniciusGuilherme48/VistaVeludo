@@ -101,16 +101,49 @@
 - **Body**:
 ```
 {
-    "nomeCliente": "Ygor Matheus",
-	"nomeProduto": "Geladeira",
-	"categoriaProduto": "Electrodomestico",
-	"qtdeProduto": 1 
+  "idCliente": "GUID_DO_CLIENTE",
+  "itens": [
+    {
+      "idProduto": "GUID_DO_PRODUTO"
+    },
+    {
+      "idProduto": "OUTRO_GUID_PRODUTO"
+    }
+  ]
 }
+
 ```
 
 - **Response**:
 ```
 {
     "message": "Pedido cadastrado com sucesso"
+}
+```
+
+### ITEM
+#### GET /pedidos
+- **Descriçao**: Lista todos os pedidos 
+
+- **Response**: Arrey de pedidos
+
+
+### ITEM
+#### POST /item
+- **Descriçao**: Cria um novo item
+
+- **Body**:
+```
+{
+  "idPedido": "GUID_DO_PEDIDO",
+  "idProduto": "GUID_DO_PRODUTO"
+}
+
+```
+
+- **Response**:
+```
+{
+    "message": "item cadastrado com sucesso"
 }
 ```
