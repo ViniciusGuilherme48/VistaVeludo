@@ -16,15 +16,13 @@ const pedidoController = {
 
             //Inserir todos os itens
             for (const item of itens) {
-                if (!item.idProduto || !item.quantidade || !item.precoUnitario) {
+                if (!item.idProduto) {
                     return res.status(400).json({ erro: "Cada item deve ter idProduto, quantidade e precoUnitario" });
                 }
 
                 await itemModel.criarItem(
                     idPedido,
-                    item.idProduto,
-                    item.quantidade,
-                    item.precoUnitario
+                    item.idProduto
                 );
             }
 
